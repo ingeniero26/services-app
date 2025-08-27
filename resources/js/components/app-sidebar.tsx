@@ -18,7 +18,14 @@ const mainNavItems: NavItem[] = [
         title:'Empresas',
         href: '/companies',
         icon: LayoutGrid,
-    }
+    },
+     {
+        title:'Departamentos',
+        href: '/departments',
+        icon: LayoutGrid,
+    },
+    
+
 ];
 
 const footerNavItems: NavItem[] = [

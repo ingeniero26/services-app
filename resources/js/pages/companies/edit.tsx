@@ -145,7 +145,8 @@ export default function Edit({company}: {company: Company}) {
                         className='w-full sm:w-auto'
                     >
                         {processing ? 'Editando...' : 'Editar'}
-                    </Button>
+                    </Button> &nbsp;
+                    <Button>Cancelar</Button>
                 </form>
             </div>
         </AppLayout>
