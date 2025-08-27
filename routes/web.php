@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -12,6 +13,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
 });
+
+// empresas
+Route::get('companies',[CompanyController::class,'index'])->name('companies.index');;
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
