@@ -2,7 +2,8 @@
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
+
 import {
   Table,
   TableBody,
@@ -38,6 +39,11 @@ export default function Index({companies}: {companies: Company[]}) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Empresas" />
+            <div className='mb-4'>
+                <Link href={'/companies/create'}>
+                    <Button className='mb-4 btn-info'>Nueva Empresa</Button>
+                </Link>
+            </div>
             {companies.length > 0 && (
                <Table>
                 <TableCaption>Listado de empresas.</TableCaption>

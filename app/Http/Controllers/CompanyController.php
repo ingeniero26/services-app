@@ -25,6 +25,9 @@ class CompanyController extends Controller
     public function create()
     {
         //
+        return Inertia::render('companies/create',[
+            'company' => new Company()
+        ]);
     }
 
     /**
@@ -32,9 +35,19 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'code' => 'required|string|max:50',
+            'email' => 'required|email|max:255',
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
+            'active' => 'boolean',
+        ]);
 
+        Company::create($validated);
+
+        return redirect()->route('companies.index')->with('success', 'Empresa creada correctamente');
+    }
     /**
      * Display the specified resource.
      */
