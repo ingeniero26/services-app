@@ -3,6 +3,7 @@ import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
+import { router } from '@inertiajs/react';
 
 import {
   Table,
@@ -70,9 +71,25 @@ export default function Index({companies}: {companies: Company[]}) {
                         <TableCell>{company.address}</TableCell>
                         <TableCell>{company.active ? 'Activo' : 'Inactivo'}</TableCell>
                         <TableCell>
-                            <Button> Editar</Button>
-                            <Button>Eliminar</Button>
-                            <Button>Detalles</Button>
+                            <Button>
+                                <Link href={`/companies/${company.id}/edit`}>
+                                    Editar
+                                </Link>
+                            </Button>
+                            <Button
+                onClick={() => {
+                    if (window.confirm('¿Estás seguro de que deseas eliminar esta empresa?')) {
+                        router.delete(`/companies/${company.id}`);
+                    }
+                }}
+            >
+                Eliminar
+            </Button>
+                            <Button>
+                                <Link href={`/companies/${company.id}`}>
+                                    Detalles
+                                </Link>
+                            </Button>
 
                         </TableCell>
                     </TableRow>
