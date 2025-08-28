@@ -25,7 +25,9 @@ class CountryController extends Controller
     public function create()
     {
         //
-        return Inertia::render('countries/create');
+        return Inertia::render('countries/create',[
+            'country' => new Country()
+        ]);
     }
 
     /**
