@@ -15,8 +15,8 @@ class DepartmentController extends Controller
     {
         // mostrar los departamento con la empresa
         $departments = Department::with('company')->get();
-        return Inertia::render('departments/index', [
-        'departments' => $departments
+        return Inertia::render('sections/index', [
+        'sections' => $departments
         ]);
     }
 
@@ -27,7 +27,7 @@ class DepartmentController extends Controller
     {
         $companies = \App\Models\Company::where('active', true)->get(['id', 'name', 'code']);
         
-        return Inertia::render('departments/create', [
+        return Inertia::render('sections/create', [
             'companies' => $companies
         ]);
     }
@@ -48,21 +48,21 @@ class DepartmentController extends Controller
 
             Department::create($validated);
 
-            return redirect()->route('departments.index')->with('success', 'Departamento creado correctamente');
+            return redirect()->route('sections.index')->with('success', 'Departamento creado correctamente');
         }
     /**
      * Display the specified resource.
      */
     public function show(Department $department)
     {
-        return Inertia::render('departments/show', [
+        return Inertia::render('sections/show', [
             'department' => $department->load('company')
         ]);
     }
 
 public function edit(Department $department)
     {
-        return Inertia::render('departments/edit', [
+        return Inertia::render('sections/edit', [
             'department' => $department->load('company')
         ]);
     }
@@ -79,7 +79,7 @@ public function edit(Department $department)
 
         $department->update($validated);
 
-        return redirect()->route('departments.index')->with('success', 'Departamento actualizado correctamente');
+        return redirect()->route('sections.index')->with('success', 'Departamento actualizado correctamente');
     }
 
     /**
@@ -89,6 +89,6 @@ public function edit(Department $department)
     {
         $department->delete();
 
-        return redirect()->route('departments.index')->with('success', 'Departamento eliminado correctamente');
+        return redirect()->route('sections.index')->with('success', 'Departamento eliminado correctamente');
     }
 }

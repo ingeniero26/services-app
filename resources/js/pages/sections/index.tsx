@@ -48,8 +48,8 @@ import {
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Departamentos',
-        href: '/departments',
+        title: 'Secciones',
+        href: '/sections',
     },
 ];
 
@@ -59,7 +59,7 @@ interface Company {
     code: string;
 }
 
-interface Department {
+interface Section {
     id: number;
     name: string;
     code?: string;
@@ -70,31 +70,31 @@ interface Department {
     company: Company;
 }
 
-export default function Departments({ departments }: { departments: Department[] }) {
+export default function Index({ sections }: { sections: Section[] }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'inactive'>('all');
 
     // Filtrar departamentos
-    const filteredDepartments = departments.filter(department => {
+    const filteredSections = sections.filter(section => {
         const matchesSearch = 
-            department.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            (department.code && department.code.toLowerCase().includes(searchTerm.toLowerCase())) ||
-            (department.manager && department.manager.toLowerCase().includes(searchTerm.toLowerCase())) ||
-            department.company.name.toLowerCase().includes(searchTerm.toLowerCase());
+            section.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            (section.code && section.code.toLowerCase().includes(searchTerm.toLowerCase())) ||
+            (section.manager && section.manager.toLowerCase().includes(searchTerm.toLowerCase())) ||
+            section.company.name.toLowerCase().includes(searchTerm.toLowerCase());
         
         const matchesStatus = 
             statusFilter === 'all' || 
-            (statusFilter === 'active' && department.active) ||
-            (statusFilter === 'inactive' && !department.active);
+            (statusFilter === 'active' && section.active) ||
+            (statusFilter === 'inactive' && !section.active);
 
         return matchesSearch && matchesStatus;
     });
 
-    const handleDelete = (department: Department) => {
-        router.delete(`/departments/${department.id}`);
+    const handleDelete = (section: Section) => {
+        router.delete(`/sections/${section.id}`);
     };
 
-    const DepartmentActions = ({ department }: { department: Department }) => (
+    const SectionActions = ({ section }: { section: Section }) => (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="h-8 w-8 p-0">
@@ -104,13 +104,13 @@ export default function Departments({ departments }: { departments: Department[]
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
                 <DropdownMenuItem asChild>
-                    <Link href={`/departments/${department.id}`} className="flex items-center">
+                    <Link href={`/sections/${section.id}`} className="flex items-center">
                         <Eye className="mr-2 h-4 w-4" />
                         Ver detalles
                     </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                    <Link href={`/departments/${department.id}/edit`} className="flex items-center">
+                    <Link href={`/sections/${section.id}/edit`} className="flex items-center">
                         <Edit className="mr-2 h-4 w-4" />
                         Editar
                     </Link>
@@ -127,13 +127,13 @@ export default function Departments({ departments }: { departments: Department[]
                             <AlertDialogTitle>¿Confirmar eliminación?</AlertDialogTitle>
                             <AlertDialogDescription>
                                 Esta acción no se puede deshacer. Se eliminará permanentemente el departamento 
-                                <strong> {department.name}</strong> del sistema.
+                                <strong> {section.name}</strong> del sistema.
                             </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
                             <AlertDialogCancel>Cancelar</AlertDialogCancel>
                             <AlertDialogAction 
-                                onClick={() => handleDelete(department)}
+                                onClick={() => handleDelete(section)}
                                 className="bg-red-600 hover:bg-red-700"
                             >
                                 Eliminar
@@ -153,9 +153,9 @@ export default function Departments({ departments }: { departments: Department[]
             <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-2">
                     <Building className="h-6 w-6 text-purple-600" />
-                    <h1 className="text-2xl font-bold text-gray-900">Departamentos</h1>
+                    <h1 className="text-2xl font-bold text-gray-900">Secciones</h1>
                     <Badge variant="secondary" className="ml-2">
-                        {filteredDepartments.length} departamentos
+                        {filteredSections.length} secciones
                     </Badge>
                 </div>
                 <div className="flex items-center space-x-3">
@@ -163,10 +163,10 @@ export default function Departments({ departments }: { departments: Department[]
                         <Download className="h-4 w-4 mr-2" />
                         Exportar
                     </Button>
-                    <Link href="/departments/create">
+                    <Link href="/sections/create">
                         <Button className="bg-purple-600 hover:bg-purple-700">
                             <Plus className="h-4 w-4 mr-2" />
-                            Nuevo Departamento
+                            Nueva Sección
                         </Button>
                     </Link>
                 </div>
@@ -200,23 +200,23 @@ export default function Departments({ departments }: { departments: Department[]
             </div>
 
             {/* Contenido principal */}
-            {filteredDepartments.length === 0 ? (
+            {filteredSections.length === 0 ? (
                 <div className="bg-white rounded-lg border shadow-sm p-12 text-center">
                     <Building className="mx-auto h-12 w-12 text-gray-400 mb-4" />
                     <h3 className="text-lg font-medium text-gray-900 mb-2">
-                        {departments.length === 0 ? 'No hay departamentos registrados' : 'No se encontraron departamentos'}
+                        {sections.length === 0 ? 'No hay departamentos registrados' : 'No se encontraron departamentos'}
                     </h3>
                     <p className="text-gray-500 mb-6">
-                        {departments.length === 0 
+                        {sections.length === 0 
                             ? 'Comienza agregando tu primer departamento al sistema.'
                             : 'Intenta ajustar los filtros de búsqueda.'
                         }
                     </p>
-                    {departments.length === 0 && (
-                        <Link href="/departments/create">
+                    {sections.length === 0 && (
+                        <Link href="/sections/create">
                             <Button>
                                 <Plus className="h-4 w-4 mr-2" />
-                                Crear Primer Departamento
+                                Crear Primer Sección
                             </Button>
                         </Link>
                     )}
@@ -238,17 +238,17 @@ export default function Departments({ departments }: { departments: Department[]
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {filteredDepartments.map((department) => (
-                                <TableRow key={department.id} className="hover:bg-gray-50">
+                            {filteredSections.map((section) => (
+                                <TableRow key={section.id} className="hover:bg-gray-50">
                                     <TableCell className="font-medium text-gray-900">
-                                        #{department.id}
+                                        #{section.id}
                                     </TableCell>
                                     <TableCell>
                                         <div className="flex items-center space-x-2">
                                             <div className="h-8 w-8 bg-purple-100 rounded-full flex items-center justify-center">
                                                 <Building className="h-4 w-4 text-purple-600" />
                                             </div>
-                                            <span className="font-medium">{department.name}</span>
+                                            <span className="font-medium">{section.name}</span>
                                         </div>
                                     </TableCell>
                                     <TableCell>
@@ -257,45 +257,45 @@ export default function Departments({ departments }: { departments: Department[]
                                                 <Building2 className="h-3 w-3 text-blue-600" />
                                             </div>
                                             <div>
-                                                <div className="font-medium text-sm">{department.company.name}</div>
-                                                <div className="text-xs text-gray-500">{department.company.code}</div>
+                                                <div className="font-medium text-sm">{section.company.name}</div>
+                                                <div className="text-xs text-gray-500">{section.company.code}</div>
                                             </div>
                                         </div>
                                     </TableCell>
                                     <TableCell>
-                                        {department.code ? (
+                                        {section.code ? (
                                             <Badge variant="outline" className="font-mono">
-                                                {department.code}
+                                                {section.code}
                                             </Badge>
                                         ) : (
                                             <span className="text-gray-400 text-sm">-</span>
                                         )}
                                     </TableCell>
-                                    <TableCell className="max-w-xs truncate" title={department.description}>
-                                        {department.description || <span className="text-gray-400 text-sm">-</span>}
+                                    <TableCell className="max-w-xs truncate" title={section.description}>
+                                        {section.description || <span className="text-gray-400 text-sm">-</span>}
                                     </TableCell>
                                     <TableCell className="font-medium">
-                                        {department.manager || <span className="text-gray-400 text-sm">-</span>}
+                                        {section.manager || <span className="text-gray-400 text-sm">-</span>}
                                     </TableCell>
                                     <TableCell>
                                         <div className="flex items-center space-x-1">
                                             <Users className="h-4 w-4 text-gray-500" />
-                                            <span className="font-medium">{department.employees_count || 0}</span>
+                                            <span className="font-medium">{section.employees_count || 0}</span>
                                         </div>
                                     </TableCell>
                                     <TableCell>
                                         <Badge 
-                                            variant={department.active !== false ? "default" : "secondary"}
-                                            className={department.active !== false 
+                                            variant={section.active !== false ? "default" : "secondary"}
+                                            className={section.active !== false 
                                                 ? "bg-green-100 text-green-800 hover:bg-green-100" 
                                                 : "bg-gray-100 text-gray-800"
                                             }
                                         >
-                                            {department.active !== false ? 'Activo' : 'Inactivo'}
+                                            {section.active !== false ? 'Activo' : 'Inactivo'}
                                         </Badge>
                                     </TableCell>
                                     <TableCell className="text-center">
-                                        <DepartmentActions department={department} />
+                                        <SectionActions section={section} />
                                     </TableCell>
                                 </TableRow>
                             ))}

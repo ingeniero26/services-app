@@ -20,8 +20,8 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
      {
-        title:'Departamentos',
-        href: '/departments',
+        title:'Secciones',
+        href: '/sections',
         icon: LayoutGrid,
     },
      {

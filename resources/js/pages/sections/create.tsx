@@ -32,12 +32,12 @@ import {
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Departamentos',
-        href: '/departments',
+        title: 'Secciones',
+        href: '/sections',
     },
     {
-        title: 'Crear Departamento',
-        href: '/departments/create',
+        title: 'Crear Secciones',
+        href: '/sections/create',
     },
 ];
 
@@ -64,7 +64,7 @@ export default function Create({ companies }: CreateProps) {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        post('/departments', {
+        post('/sections', {
             onSuccess: () => {
                 // Redirect handled by controller
             },
@@ -76,7 +76,7 @@ export default function Create({ companies }: CreateProps) {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Crear Departamento" />
+            <Head title="Crear Seccion" />
             
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
@@ -85,8 +85,8 @@ export default function Create({ companies }: CreateProps) {
                         <Building className="h-5 w-5 text-purple-600" />
                     </div>
                     <div>
-                        <h1 className="text-2xl font-bold text-gray-900">Crear Departamento</h1>
-                        <p className="text-gray-600">Agrega un nuevo departamento al sistema</p>
+                        <h1 className="text-2xl font-bold text-gray-900">Crear Sección</h1>
+                        <p className="text-gray-600">Agrega un nuevo sección al sistema</p>
                     </div>
                 </div>
                 <Link href="/departments">
@@ -102,10 +102,10 @@ export default function Create({ companies }: CreateProps) {
                     <CardHeader>
                         <CardTitle className="flex items-center space-x-2">
                             <Building2 className="h-5 w-5 text-purple-600" />
-                            <span>Información del Departamento</span>
+                            <span>Información de la Sección</span>
                         </CardTitle>
                         <CardDescription>
-                            Complete los datos del nuevo departamento. Los campos marcados con * son obligatorios.
+                            Complete los datos del nuevo sección. Los campos marcados con * son obligatorios.
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -226,7 +226,7 @@ export default function Create({ companies }: CreateProps) {
                                     onCheckedChange={(checked) => setData('active', checked as boolean)}
                                 />
                                 <Label htmlFor="active" className="text-sm font-medium">
-                                    Departamento activo
+                                    Sección activo
                                 </Label>
                                 {errors.active && (
                                     <p className="text-sm text-red-600">{errors.active}</p>
@@ -253,7 +253,7 @@ export default function Create({ companies }: CreateProps) {
                                     ) : (
                                         <div className="flex items-center space-x-2">
                                             <Save className="h-4 w-4" />
-                                            <span>Crear Departamento</span>
+                                            <span>Crear Sección</span>
                                         </div>
                                     )}
                                 </Button>
