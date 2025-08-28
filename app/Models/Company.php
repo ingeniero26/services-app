@@ -11,4 +11,10 @@ class Company extends Model
     protected $fillable = [
         'name', 'code', 'email', 'phone', 'address', 'active'
     ];
+
+    // relacion con departments
+    public  function department()
+    {
+        return $this->hasMany(Department::class);
+    }
 }
