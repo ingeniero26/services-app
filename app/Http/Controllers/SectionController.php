@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Models\Section;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class DepartmentController extends Controller
+class SectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class DepartmentController extends Controller
     public function index()
     {
         // mostrar los departamento con la empresa
-        $departments = Department::with('company')->get();
+        $departments = Section::with('company')->get();
         return Inertia::render('sections/index', [
         'sections' => $departments
         ]);
@@ -46,21 +47,21 @@ class DepartmentController extends Controller
                 'active' => 'boolean',
             ]);
 
-            Department::create($validated);
+            Section::create($validated);
 
             return redirect()->route('sections.index')->with('success', 'Departamento creado correctamente');
         }
     /**
      * Display the specified resource.
      */
-    public function show(Department $department)
+    public function show(Section $department)
     {
         return Inertia::render('sections/show', [
             'department' => $department->load('company')
         ]);
     }
 
-public function edit(Department $department)
+public function edit(Section $department)
     {
         return Inertia::render('sections/edit', [
             'department' => $department->load('company')
@@ -70,7 +71,7 @@ public function edit(Department $department)
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Department $department)
+    public function update(Request $request, Section $department)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -85,7 +86,7 @@ public function edit(Department $department)
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Department $department)
+    public function destroy(Section $department)
     {
         $department->delete();
 

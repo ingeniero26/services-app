@@ -3,6 +3,7 @@
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\SectionController;
 use App\Models\Country;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,9 +28,9 @@ Route::put('companies/{company}',[CompanyController::class,'update'])->name('com
 Route::delete('companies/{company}',[CompanyController::class,'destroy'])->name('companies.destroy');
 
 //departmentos
-Route::get('sections',[DepartmentController::class,'index'])->name('sections.index');
-Route::get('sections/create',[DepartmentController::class,'create'])->name('sections.create');
-Route::post('sections',[DepartmentController::class,'store'])->name('sections.store');
+Route::get('sections',[SectionController::class,'index'])->name('sections.index');
+Route::get('sections/create',[SectionController::class,'create'])->name('sections.create');
+Route::post('sections',[SectionController::class,'store'])->name('sections.store');
 
 
 // paises

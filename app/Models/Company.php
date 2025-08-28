@@ -15,7 +15,7 @@ class Company extends Model
     // relacion con departments
     public  function department()
     {
-        return $this->hasMany(Department::class);
+        return $this->hasMany(Section::class);
     }
 
    
