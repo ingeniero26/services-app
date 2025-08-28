@@ -24,18 +24,23 @@ const mainNavItems: NavItem[] = [
         href: '/departments',
         icon: LayoutGrid,
     },
+     {
+        title:'Paises',
+        href: '/country',
+        icon: LayoutGrid,
+    },
     
 
 ];
 
 const footerNavItems: NavItem[] = [
     {
-        title: 'Repository',
+        title: 'Usuarios',
         href: 'https://github.com/laravel/react-starter-kit',
         icon: Folder,
     },
     {
-        title: 'Documentation',
+        title: 'Generales',
         href: 'https://laravel.com/docs/starter-kits#react',
         icon: BookOpen,
     },
