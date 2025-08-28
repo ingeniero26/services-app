@@ -57,28 +57,28 @@ class SectionController extends Controller
     public function show(Section $department)
     {
         return Inertia::render('sections/show', [
-            'department' => $department->load('company')
+            'section' => $department->load('company')
         ]);
     }
 
-public function edit(Section $department)
+public function edit(Section $section)
     {
         return Inertia::render('sections/edit', [
-            'department' => $department->load('company')
+            'section' => $section->load('company')
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Section $department)
+    public function update(Request $request, Section $section)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'company_id' => 'required|exists:companies,id',
         ]);
 
-        $department->update($validated);
+        $section->update($validated);
 
         return redirect()->route('sections.index')->with('success', 'Departamento actualizado correctamente');
     }
@@ -86,10 +86,10 @@ public function edit(Section $department)
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Section $department)
+    public function destroy(Section $section)
     {
-        $department->delete();
+        $section->delete();
 
-        return redirect()->route('sections.index')->with('success', 'Departamento eliminado correctamente');
+        return redirect()->route('sections.index')->with('success', 'Sección eliminada correctamente');
     }
 }

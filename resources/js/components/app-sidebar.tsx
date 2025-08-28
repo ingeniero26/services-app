@@ -26,7 +26,7 @@ const mainNavItems: NavItem[] = [
     },
      {
         title:'Paises',
-        href: '/country',
+        href: '/countries',
         icon: LayoutGrid,
     },
     
